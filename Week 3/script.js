@@ -1,15 +1,14 @@
-console.log('this is the')
 const searchButton = document.querySelector(".search-btn");
 const recipeSection = document.querySelector(".recipe-section");
+const recipeNameInput = document.querySelector(".recipe-search");
 console.log(searchButton);
 async function fetchRecipes() {
-    const url = 'https://api.spoonacular.com/recipes/complexSearch?query=pasta&maxFat=25&number=2&apiKey=c35db270fff04266a1040cc9c23a1eb8';
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeNameInput.value}`;
 
     try {
         const response = await fetch(url,{
         method: 'GET',
         headers : {
-        'X-API-Key': 'c35db270fff04266a1040cc9c23a1eb8',
         'Accept': 'application/json'
         }
         });
@@ -17,22 +16,23 @@ async function fetchRecipes() {
             throw new Error(`${response.status}`);
         }
         const Datas = await response.json();
-        console.log(Datas.results);
-        return Datas.results;
+        //console.log(Datas.meals);
+        return Datas.meals;
     } catch (error) {
         console.log(error.message);
 
     }
 }
-fetchRecipes();
+searchButton.addEventListener('click', fetchRecipes)
+//fetchRecipes();
 async function getResults(){
-    const results = fetchRecipes();
-    console.log(results);
+    const results = await fetchRecipes();
+    //console.log(results);
 
-  const recipes = results.map(result => {
-    `<p class="title">${result.title}</p>`
-    }).join('');
+  const recipes = results.map(result => 
+    `<p class="title">${result.strMeal}</p>`
+    ).join('');
     recipeSection.innerHTML = recipes;
 }
-getResults()
+getResults();
 
