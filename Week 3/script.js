@@ -1,6 +1,8 @@
 const searchButton = document.querySelector(".search-btn");
 const recipeSection = document.querySelector(".recipe-section");
 const recipeNameInput = document.querySelector(".recipe-search");
+const categoryFilter = document.querySelector(".category-dropdown");
+console.log(categoryFilter.value);
 console.log(searchButton);
 let loadingState = false;
 searchButton.addEventListener('click', function(){
@@ -32,7 +34,8 @@ searchButton.addEventListener('click', function(){
         const results = await fetchRecipes();
         console.log(results);
     if(results && !loadingState){
-      const recipes = results.map(result => 
+      const filteredRecipeResults =results.filter((result) =>result.strCategory === categoryFilter.value )
+      const recipes = filteredRecipeResults.map(result => 
         `<div
         style ="
         background-image: url('${result.strMealThumb}');
@@ -62,5 +65,20 @@ searchButton.addEventListener('click', function(){
     console.log(loadingState);
     
 })
+const listAllitems = async function(){
+    const url = 'https://www.themealdb.com/api/json/v1/1/categories.php'
+    try {
+        const response = await fetch(url);
+        if(!response.ok){
+            throw new Error('request failed')
+        }
+        const DataSet = await response.json()
+        console.log(DataSet.categories);
+    } catch (error) {
+        console.log(error.message)
+    }
+   
+}
+listAllitems()
 
 
