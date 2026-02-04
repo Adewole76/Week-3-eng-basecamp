@@ -35,6 +35,8 @@ searchButton.addEventListener('click', function(){
         console.log(results);
     if(results && !loadingState){
       const filteredRecipeResults =results.filter((result) =>result.strCategory === categoryFilter.value )
+      console.log(filteredRecipeResults);
+     if(filteredRecipeResults.length > 0){
       const recipes = filteredRecipeResults.map(result => 
         `<div
         style ="
@@ -52,6 +54,9 @@ searchButton.addEventListener('click', function(){
         
         ).join('');
         recipeSection.innerHTML = recipes;
+    }else if(filteredRecipeResults.length === 0){
+        console.log('no recipes found in try adjusting your filters')
+    }
     }else if(!results && !loadingState){
         const nullMessage = 'No results for your search';
         recipeSection.innerHTML = nullMessage;
