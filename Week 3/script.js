@@ -71,14 +71,18 @@ searchButton.addEventListener('click', function(){
     
 })
 const listAllitems = async function(){
-    const url = 'https://www.themealdb.com/api/json/v1/1/categories.php'
+    const url = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list'
+   
     try {
-        const response = await fetch(url);
+        const response = await fetch(url,
+            {method: 'GET',
+        }
+            );
         if(!response.ok){
             throw new Error('request failed')
         }
         const DataSet = await response.json()
-        console.log(DataSet.categories);
+        console.log(DataSet.meals);
     } catch (error) {
         console.log(error.message)
     }
