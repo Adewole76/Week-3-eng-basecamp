@@ -1,28 +1,25 @@
 'use strict'
-
-import { Spinner } from "spin.js";
-
 const searchButton = document.querySelector(".search-btn");
 const recipeSection = document.querySelector(".recipe-section");
 const recipeNameInput = document.querySelector(".recipe-search");
 const categoryFilter = document.querySelector(".category-dropdown");
 const spinContainer = document.getElementById('spinnerContainer');
-const spinner = new Spinner({
-    lines: 12,        // Number of lines
-  length: 20,       // Length of each line
-  width: 10,        // Line thickness
-  radius: 30,       // Radius of the spinner
-  color: '#000',    // Color
-  speed: 1,  
-  trail: 60
+ const spinner = new Spinner({
+   lines: 12,        // Number of lines
+   length: 20,       // Length of each line
+   width: 10,        // Line thickness
+   radius: 30,       // Radius of the spinner
+   color: '#000',    // Color
+   speed: 1,  
+   trail: 60
 });
-spinner.spin(spinContainer)
+console.log(typeof spinner);
 console.log(categoryFilter.value);
 console.log(searchButton);
-let loadingState = false;
-searchButton.addEventListener('click', function(){
+searchButton.addEventListener('click', async function(){
+    spinner.spin(spinContainer);
     async function fetchRecipes() {
-        loadingState = true;
+    
         const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeNameInput.value}`;
         try {
             const response = await fetch(url,{
@@ -42,13 +39,12 @@ searchButton.addEventListener('click', function(){
     
         }
     }
-    fetchRecipes();
-
-    loadingState = false;
+    await fetchRecipes();
+    spinner.stop(spinContainer);
     async function getResults(){
         const results = await fetchRecipes();
         console.log(results);
-    if(results && !loadingState){
+    if(results){
       const filteredRecipeResults =results.filter((result) =>result.strCategory === categoryFilter.value )
       console.log(filteredRecipeResults);
      if(filteredRecipeResults.length > 0){
@@ -72,17 +68,13 @@ searchButton.addEventListener('click', function(){
     }else if(filteredRecipeResults.length === 0){
         console.log('no recipes found in try adjusting your filters')
     }
-    }else if(!results && !loadingState){
+    }else if(!results){
         const nullMessage = 'No results for your search';
         recipeSection.innerHTML = nullMessage;
-    }else if(loadingState){
-        const loadingMessage = 'loading...';
-        recipeSection.innerHTML = loadingMessage;
     }
 }
     getResults();
-    loadingState = false;
-    console.log(loadingState);
+    
     
 })
 const listAllitems = async function(){
