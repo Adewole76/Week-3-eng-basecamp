@@ -1,7 +1,22 @@
+'use strict'
+
+import { Spinner } from "spin.js";
+
 const searchButton = document.querySelector(".search-btn");
 const recipeSection = document.querySelector(".recipe-section");
 const recipeNameInput = document.querySelector(".recipe-search");
 const categoryFilter = document.querySelector(".category-dropdown");
+const spinContainer = document.getElementById('spinnerContainer');
+const spinner = new Spinner({
+    lines: 12,        // Number of lines
+  length: 20,       // Length of each line
+  width: 10,        // Line thickness
+  radius: 30,       // Radius of the spinner
+  color: '#000',    // Color
+  speed: 1,  
+  trail: 60
+});
+spinner.spin(spinContainer)
 console.log(categoryFilter.value);
 console.log(searchButton);
 let loadingState = false;

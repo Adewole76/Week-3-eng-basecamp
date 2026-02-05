@@ -38,6 +38,13 @@ header{
 .search-btn{
     padding: 1em 2em;
 }
+#spinnerContainer {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ccc;
+    margin: 50px;
+}
 .recipe-card{
     
 }

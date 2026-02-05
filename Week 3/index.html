@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../node_modules/spin.js/spin.css">
 </head>
 <body>
     <main>
@@ -30,12 +31,13 @@
                 <option value="Pork">Pork</option>
             </select>
         </header>
-       
+
             <div class="recipe-section"></div>
                 </main>
-    
-                <p class="zero-recipes-message">no recipes found try adjusting your filters</p>
 
-   <script src="script.js"></script>
+        <p class="zero-recipes-message">no recipes found try adjusting your filters</p>
+<div id="spinnerContainer"></div>
+   <script type="module" src="script.js"></script>
+   <script type="module" src="../node_modules/spin.js/spin.js"></script>
 </body>
 </html>
