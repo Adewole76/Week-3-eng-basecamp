@@ -4,12 +4,16 @@ const recipeSection = document.querySelector(".recipe-section");
 const recipeNameInput = document.querySelector(".recipe-search");
 const categoryFilter = document.querySelector(".category-dropdown");
 const spinContainer = document.getElementById('spinnerContainer');
+const userMessageUpdate = document.querySelector(".user-message-update");
+const formValidation = document.querySelector("form-validation");
+
+console.log(userMessageUpdate);
  const spinner = new Spinner({
    lines: 12,        // Number of lines
    length: 20,       // Length of each line
    width: 10,        // Line thickness
    radius: 30,       // Radius of the spinner
-   color: '#000',    // Color
+   color: ' rgb(255, 77, 0)',    // Color
    speed: 1,  
    trail: 60
 });
@@ -17,7 +21,10 @@ console.log(typeof spinner);
 console.log(categoryFilter.value);
 console.log(searchButton);
 searchButton.addEventListener('click', async function(){
+    if(recipeNameInput){
     spinner.spin(spinContainer);
+    recipeSection.innerHTML ="";
+    userMessageUpdate.classList.add('hidden');
     async function fetchRecipes() {
     
         const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeNameInput.value}`;
@@ -38,6 +45,7 @@ searchButton.addEventListener('click', async function(){
             console.log(error.message);
     
         }
+        
     }
     await fetchRecipes();
     spinner.stop(spinContainer);
@@ -65,15 +73,25 @@ searchButton.addEventListener('click', async function(){
         
         ).join('');
         recipeSection.innerHTML = recipes;
+        
     }else if(filteredRecipeResults.length === 0){
-        console.log('no recipes found in try adjusting your filters')
+        console.log('no recipes found in try adjusting your filters');
+        userMessageUpdate.classList.remove('hidden') ;
+        userMessageUpdate.textContent = 'No recipes found try adjusting your filters';
+        recipeSection.innerHTML ="";
     }
     }else if(!results){
-        const nullMessage = 'No results for your search';
-        recipeSection.innerHTML = nullMessage;
+        userMessageUpdate.classList.remove('hidden') ;
+        userMessageUpdate.textContent = 'No recipes found try adjusting your filters';
+        recipeSection.innerHTML ="";
     }
 }
     getResults();
+}else if(!recipeNameInput){
+      formValidation.textContent = `you haven't entered the recipe namae`;
+    }
+    
+    
     
     
 })
