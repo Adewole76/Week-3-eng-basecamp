@@ -81,16 +81,17 @@ console.log(viewDetailsButton);
             const modalDiv = document.createElement('div');
             const modalCloseButton = document.createElement('button');
             modalCloseButton.textContent = 'Close';
-            modalDiv.style.width = '300px';
-            modalDiv.style.height = '200px';
             modalDiv.style.zIndex = 102;
             modalDiv.innerHTML = `
              <p>${results[i].strMeal}</p>
+             <p>${results[i].strInstructions}</p>
             `
             modalDiv.style.backgroundColor = 'blue';
             modalDiv.style.position = 'fixed';
-            modalDiv.style.top = '50%'
-            modalDiv.style.left = '50%';
+            modalDiv.style.top = '0'
+            modalDiv.style.left = '0';
+            modalDiv.style.right = '0';
+            modalDiv.style.bottom = '0';
             modalDiv.appendChild(modalCloseButton);
             document.body.appendChild(modalDiv);
             bodyOverlay.classList.remove('hidden');
