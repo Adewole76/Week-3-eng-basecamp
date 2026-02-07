@@ -6,7 +6,7 @@ const categoryFilter = document.querySelector(".category-dropdown");
 const spinContainer = document.getElementById('spinnerContainer');
 const userMessageUpdate = document.querySelector(".user-message-update");
 const formValidation = document.querySelector("form-validation");
-
+const bodyOverlay = document.querySelector(".overlay")
 console.log(userMessageUpdate);
  const spinner = new Spinner({
    lines: 12,        // Number of lines
@@ -69,11 +69,39 @@ searchButton.addEventListener('click', async function(){
         class="recipe-card">
         <h3 class="title">${result.strMeal}</h3>
         <p>Category:${result.strCategory}</p>
+        <button class="recipe-details">view details</button>
         </div>`
-        
         ).join('');
-        recipeSection.innerHTML = recipes;
-        
+        recipeSection.insertAdjacentHTML('beforeend', recipes);
+        const viewDetailsButton = document.querySelectorAll(".recipe-details");
+console.log(viewDetailsButton);
+     for(let i = 0; i < viewDetailsButton.length; i++){
+        viewDetailsButton[i].addEventListener('click',function(){
+            viewDetailsButton[i].disabled = true;
+            const modalDiv = document.createElement('div');
+            const modalCloseButton = document.createElement('button');
+            modalCloseButton.textContent = 'Close';
+            modalDiv.style.width = '300px';
+            modalDiv.style.height = '200px';
+            modalDiv.style.zIndex = 102;
+            modalDiv.innerHTML = `
+             <p>${results[i].strMeal}</p>
+            `
+            modalDiv.style.backgroundColor = 'blue';
+            modalDiv.style.position = 'fixed';
+            modalDiv.style.top = '50%'
+            modalDiv.style.left = '50%';
+            modalDiv.appendChild(modalCloseButton);
+            document.body.appendChild(modalDiv);
+            bodyOverlay.classList.remove('hidden');
+            modalCloseButton.addEventListener('click', function(){
+                modalDiv.style.display = 'none';
+                viewDetailsButton[i].disabled = false;
+                bodyOverlay.classList.add('hidden');
+                modalDiv.remove();
+            })
+        })
+     }
     }else if(filteredRecipeResults.length === 0){
         console.log('no recipes found in try adjusting your filters');
         userMessageUpdate.classList.remove('hidden') ;
@@ -86,15 +114,15 @@ searchButton.addEventListener('click', async function(){
         recipeSection.innerHTML ="";
     }
 }
+
     getResults();
 }else if(!recipeNameInput){
       formValidation.textContent = `you haven't entered the recipe namae`;
     }
     
-    
-    
-    
 })
+
+
 const listAllitems = async function(){
     const url = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list'
    
@@ -114,5 +142,4 @@ const listAllitems = async function(){
    
 }
 listAllitems()
-
 
