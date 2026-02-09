@@ -6,7 +6,7 @@ const categoryFilter = document.querySelector(".category-dropdown");
 const spinContainer = document.getElementById('spinnerContainer');
 const userMessageUpdate = document.querySelector(".user-message-update");
 const formValidation = document.querySelector("form-validation");
-const bodyOverlay = document.querySelector(".overlay")
+const bodyOverlay = document.querySelector(".overlay");
 console.log(userMessageUpdate);
  const spinner = new Spinner({
    lines: 12,        // Number of lines
@@ -20,6 +20,11 @@ console.log(userMessageUpdate);
 console.log(typeof spinner);
 console.log(categoryFilter.value);
 console.log(searchButton);
+let favouriteRecipes = [];
+const formerSavedRecipes = localStorage.getItem('favourite');
+const parsedformerSavedRecipes = JSON.parse(formerSavedRecipes);
+favouriteRecipes = parsedformerSavedRecipes;
+console.log('page has been fully loaded');
 searchButton.addEventListener('click', async function(){
     if(recipeNameInput){
     spinner.spin(spinContainer);
@@ -70,11 +75,15 @@ searchButton.addEventListener('click', async function(){
         <h3 class="title">${result.strMeal}</h3>
         <p>Category:${result.strCategory}</p>
         <button class="recipe-details">view details</button>
+        <button class="save-recipe">save</button>
         </div>`
         ).join('');
         recipeSection.insertAdjacentHTML('beforeend', recipes);
         const viewDetailsButton = document.querySelectorAll(".recipe-details");
+        const saveRecipe = document.querySelectorAll(".save-recipe");
 console.log(viewDetailsButton);
+console.log(saveRecipe);
+  // recipe modal 
      for(let i = 0; i < viewDetailsButton.length; i++){
         viewDetailsButton[i].addEventListener('click',function(){
             viewDetailsButton[i].disabled = true;
@@ -88,10 +97,10 @@ console.log(viewDetailsButton);
             `
             modalDiv.style.backgroundColor = 'blue';
             modalDiv.style.position = 'fixed';
-            modalDiv.style.top = '0'
-            modalDiv.style.left = '0';
-            modalDiv.style.right = '0';
-            modalDiv.style.bottom = '0';
+            modalDiv.style.top = '50%'
+            modalDiv.style.left = '50%';
+            // modalDiv.style.right = '0';
+            // modalDiv.style.bottom = '0';
             modalDiv.appendChild(modalCloseButton);
             document.body.appendChild(modalDiv);
             bodyOverlay.classList.remove('hidden');
@@ -103,6 +112,15 @@ console.log(viewDetailsButton);
             })
         })
      }
+     for(let i = 0;i<saveRecipe.length; i++){
+        saveRecipe[i].addEventListener('click', function(){
+          favouriteRecipes.push(results[i]);
+            localStorage.setItem('favourite', JSON.stringify(favouriteRecipes));
+        })     
+     }
+    
+       
+
     }else if(filteredRecipeResults.length === 0){
         console.log('no recipes found in try adjusting your filters');
         userMessageUpdate.classList.remove('hidden') ;
@@ -123,7 +141,7 @@ console.log(viewDetailsButton);
     
 })
 
-
+// list all recipe 
 const listAllitems = async function(){
     const url = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list'
    
