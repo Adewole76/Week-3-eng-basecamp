@@ -20,7 +20,7 @@ console.log(userMessageUpdate);
 console.log(typeof spinner);
 console.log(categoryFilter.value);
 console.log(searchButton);
-let favouriteRecipes = [];
+let favouriteRecipes;
 const formerSavedRecipes = localStorage.getItem('favourite');
 const parsedformerSavedRecipes = JSON.parse(formerSavedRecipes);
 favouriteRecipes = parsedformerSavedRecipes;
@@ -92,13 +92,15 @@ console.log(saveRecipe);
             modalCloseButton.textContent = 'Close';
             modalDiv.style.zIndex = 102;
             modalDiv.innerHTML = `
-             <p>${results[i].strMeal}</p>
-             <p>${results[i].strInstructions}</p>
+             <p>${filteredRecipeResults[i].strMeal}</p>
+             <p>${filteredRecipeResults[i].strInstructions}</p>
             `
-            modalDiv.style.backgroundColor = 'blue';
+            modalDiv.style.backgroundColor = 'white';
             modalDiv.style.position = 'fixed';
-            modalDiv.style.top = '50%'
-            modalDiv.style.left = '50%';
+            modalDiv.style.top = '0'
+            modalDiv.style.bottom = '0';
+            modalDiv.style.left = '10%'
+            modalDiv.style.right = '10%';
             // modalDiv.style.right = '0';
             // modalDiv.style.bottom = '0';
             modalDiv.appendChild(modalCloseButton);
@@ -114,7 +116,7 @@ console.log(saveRecipe);
      }
      for(let i = 0;i<saveRecipe.length; i++){
         saveRecipe[i].addEventListener('click', function(){
-          favouriteRecipes.push(results[i]);
+          favouriteRecipes.push(filteredRecipeResults[i]);
             localStorage.setItem('favourite', JSON.stringify(favouriteRecipes));
         })     
      }
