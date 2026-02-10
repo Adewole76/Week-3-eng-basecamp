@@ -10,6 +10,7 @@ body{
     grid-auto-rows: minmax(250px, auto);
     row-gap: 1em;
     column-gap: 1em;
+    z-index: 102;
 }
 
 .logo{
@@ -55,13 +56,16 @@ header{
     position: fixed;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
     width: 200px;
     height: 200px;
+  
 }
 .user-message-update{
     position: fixed;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
 }
 .overlay{
     position: fixed;
@@ -70,7 +74,7 @@ header{
     left: 0;
     right: 0;
     background-color: rgba(49, 47, 47, 0.34);
-    z-index: 101;
+    z-index: 104;
 }
 .category-section{
     display: grid;
@@ -78,6 +82,4 @@ header{
 }
 .category-section button{
   padding: 2em 1em;
-}
-.recipe-card{
 }

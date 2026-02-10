@@ -7,6 +7,7 @@ const spinContainer = document.getElementById('spinnerContainer');
 const userMessageUpdate = document.querySelector(".user-message-update");
 const formValidation = document.querySelector("form-validation");
 const bodyOverlay = document.querySelector(".overlay");
+spinContainer.classList.add('hidden');
 console.log(userMessageUpdate);
  const spinner = new Spinner({
    lines: 12,        // Number of lines
@@ -27,6 +28,7 @@ favouriteRecipes = parsedformerSavedRecipes;
 console.log('page has been fully loaded');
 searchButton.addEventListener('click', async function(){
     if(recipeNameInput){
+    spinContainer.classList.remove('hidden')
     spinner.spin(spinContainer);
     recipeSection.innerHTML ="";
     userMessageUpdate.classList.add('hidden');
@@ -54,6 +56,7 @@ searchButton.addEventListener('click', async function(){
     }
     await fetchRecipes();
     spinner.stop(spinContainer);
+    spinContainer.classList.add('hidden');
     async function getResults(){
         const results = await fetchRecipes();
         console.log(results);
@@ -84,13 +87,13 @@ searchButton.addEventListener('click', async function(){
 console.log(viewDetailsButton);
 console.log(saveRecipe);
   // recipe modal 
-     for(let i = 0; i < viewDetailsButton.length; i++){
+     for(let i = 0; i <= viewDetailsButton.length; i++){
         viewDetailsButton[i].addEventListener('click',function(){
             viewDetailsButton[i].disabled = true;
             const modalDiv = document.createElement('div');
             const modalCloseButton = document.createElement('button');
             modalCloseButton.textContent = 'Close';
-            modalDiv.style.zIndex = 102;
+            modalDiv.style.zIndex = 106;
             modalDiv.innerHTML = `
              <p>${filteredRecipeResults[i].strMeal}</p>
              <ul>
