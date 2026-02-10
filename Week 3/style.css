@@ -41,10 +41,15 @@ header{
 .recipe-search{
  width: 80%;
  padding: 1em 0 1em 1em;
+ border-top-left-radius: 2em;
+ border-bottom-left-radius: 2em;
 }
 
 .search-btn{
     padding: 1em 2em;
+    margin-left: -9px;
+    border-top-right-radius: 2em;
+    border-bottom-right-radius: 2em;
 }
 #spinnerContainer {
     position: fixed;
@@ -66,6 +71,13 @@ header{
     right: 0;
     background-color: rgba(49, 47, 47, 0.34);
     z-index: 101;
+}
+.category-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.category-section button{
+  padding: 2em 1em;
 }
 .recipe-card{
 }

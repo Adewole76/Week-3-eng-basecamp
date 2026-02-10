@@ -93,6 +93,28 @@ console.log(saveRecipe);
             modalDiv.style.zIndex = 102;
             modalDiv.innerHTML = `
              <p>${filteredRecipeResults[i].strMeal}</p>
+             <ul>
+            ${filteredRecipeResults[i].strIngredient1?`<li>${filteredRecipeResults[i].strIngredient1}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient2?`<li>${filteredRecipeResults[i].strIngredient2}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient3?`<li>${filteredRecipeResults[i].strIngredient3}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient4?`<li>${filteredRecipeResults[i].strIngredient4}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient5?`<li>${filteredRecipeResults[i].strIngredient5}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient6?`<li>${filteredRecipeResults[i].strIngredient6}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient7?`<li>${filteredRecipeResults[i].strIngredient7}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient8?`<li>${filteredRecipeResults[i].strIngredient8}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient9?`<li>${filteredRecipeResults[i].strIngredient9}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient10?`<li>${filteredRecipeResults[i].strIngredient10}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient11?`<li>${filteredRecipeResults[i].strIngredient11}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient12?`<li>${filteredRecipeResults[i].strIngredient12}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient13?`<li>${filteredRecipeResults[i].strIngredient13}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient14?`<li>${filteredRecipeResults[i].strIngredient14}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient15?`<li>${filteredRecipeResults[i].strIngredient15}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient16?`<li>${filteredRecipeResults[i].strIngredient16}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient17?`<li>${filteredRecipeResults[i].strIngredient17}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient18?`<li>${filteredRecipeResults[i].strIngredient18}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient19?`<li>${filteredRecipeResults[i].strIngredient19}</li>`:`<p style="display: none">no recipe</p>`}
+            ${filteredRecipeResults[i].strIngredient20?`<li>${filteredRecipeResults[i].strIngredient20}</li>`:`<p style="display: none">no recipe</p>`}
+             </ul>
              <p>${filteredRecipeResults[i].strInstructions}</p>
             `
             modalDiv.style.backgroundColor = 'white';
